@@ -7,12 +7,12 @@ const newRecipes = async (req, res) => {
     try {
         const { title, description, userId, ingredients } = req.body;
 
-        // if (!title || !description || !userId || !Array.isArray(ingredients) || ingredients.some(ing => !ing.name || !ing.quantity)) {
-        //     return res.status(400).json({
-        //         ok: false,
-        //         message: 'Campos faltantes o inválidos: title, description, userId, ingredients',
-        //     });
-        // }
+        if (!title || !description || !userId || !Array.isArray(ingredients) || ingredients.some(ing => !ing.name || !ing.quantity)) {
+            return res.status(400).json({
+                ok: false,
+                message: 'Campos faltantes o inválidos: title, description, userId, ingredients',
+            });
+        }
 
         const result = await createRecipe({ title, description, userId, ingredients });
 
@@ -90,8 +90,8 @@ export const traerRecipesPorUserId = async (req, res) => {
 
 
 export const editarRecipeById = async (req, res) => {
-    const { id } = req.params;  // Obtener el userId y recipeId desde los parámetros de la URL
-    const { title, ingredients, description } = req.body;  // Obtener los nuevos datos de la receta desde el cuerpo de la solicitud
+    const { id } = req.params;  
+    const { title, ingredients, description } = req.body;  
 
     try {
 

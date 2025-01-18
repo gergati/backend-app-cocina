@@ -39,7 +39,6 @@ export const findOneByEmail = async (email) => {
                 password: true
             }
         })
-        // Verifica si se encontró el usuario
         if (!userByEmail) {
             return {
                 ok: false,
